@@ -1,0 +1,78 @@
+import random
+
+# Expanded lists of names
+male_first_names = ["Arin", "Brynn", "Cale", "Dara", "Elric", "Fay", "Gavin", "Hale", "Ivor", "Jor", "Kane", "Liam", "Marek", "Nyle", "Owen", "Pike", "Quin", "Reed", "Soren", "Talon", "Uther", "Vance", "Wade", "Xander", "Yorick", "Zane", "Alexander", "Scott"]
+female_first_names = ["Aria", "Brynn", "Cora", "Dara", "Elena", "Faye", "Gwen", "Hara", "Iris", "Jade", "Kara", "Lara", "Maeve", "Nina", "Opal", "Pia", "Quinn", "Rose", "Sara", "Tara", "Ula", "Vera", "Wyn", "Xena", "Yara", "Zara", "Frances", "Lydia", "Violet"]
+last_names = ["Brightwood", "Ironfist", "Stormwind", "Silverleaf", "Swanson", "Darkwood", "Shadowalker", "Fireforge", "Frostblade", "Windrider", "Stonehammer", "Ravenclaw", "Stormbreaker", "Moonshadow", "Duskblade", "Lightbringer"]
+
+# Possible options for each character attribute
+races_classes = {
+    "Human": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Paladin", "Priest", "Ranger", "Rogue", "Wizard"],
+    "Elf": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Wizard"],
+    "Dwarf": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Wizard"],
+    "Aumaua": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Wizard"],
+    "Orlan": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Wizard"],
+    "Godlike": ["Barbarian", "Chanter", "Cipher", "Druid", "Fighter", "Monk", "Paladin", "Priest", "Ranger", "Rogue", "Wizard"]
+}
+alignments = ["Benevolent", "Clever", "Deceptive", "Diplomatic", "Passionate", "Rational", "Stoic"]
+
+skills = ["Athletics", "Lore", "Mechanics", "Stealth", "Survival"]
+
+def roll_ability_scores():
+    return sum(sorted(random.choices(range(1, 7), k=4))[1:])
+
+def generate_name():
+    gender = random.choice(["male", "female"])
+    first_name = random.choice(male_first_names if gender == "male" else female_first_names)
+    last_name = random.choice(last_names)
+    return f"{first_name} {last_name}"
+
+def generate_backstory(character):
+    name = character["Name"]
+    race = character["Race"]
+    char_class = character["Class"]
+    alignment = character["Alignment"]
+    
+    backstories = [
+        f"{name} was born in the Deadfire Archipelago, a land of lush jungles and ancient ruins. As a {char_class.lower()}, they learned to navigate the treacherous terrain and fend off deadly predators. Their journey began when a vision of a mystical artifact led them across the archipelago in search of lost relics and forgotten lore. Along the way, they formed alliances with the native tribes and encountered spirits of the land who imparted ancient wisdom. Now, {name} seeks to unlock the secrets of their own godlike heritage and harness their latent powers for the greater good.",
+        f"Raised in the White Marches, {name} was fascinated by the dwarven craftsmanship and the mysteries hidden within the mountains. Trained as a {char_class.lower()}, they ventured deep into the caverns and foundries, uncovering forgotten artifacts and battling ancient guardians. Their quest for knowledge brought them into conflict with rival expeditions and treacherous mercenaries who sought to claim the dwarven secrets for themselves. Through perseverance and ingenuity, {name} emerged victorious, earning the respect of their peers and the admiration of the dwarven clans.",
+        f"{name} hails from the distant forests of Eir Glanfath, where the ancient ruins of Engwith hold secrets of the past. As a {char_class.lower()}, they studied the mystical energies that permeate the land, honing their skills in arcane arts and nature magic. Their journey began when they received a vision of a looming cataclysm that threatens to consume the world. Guided by the voices of their ancestors, {name} set out to uncover the truth behind the gods' disappearance and restore balance to the realm. Along the way, they encountered ancient spirits and enigmatic scholars who tested their resolve and deepened their understanding of the cosmic forces at play.",
+        f"Born under the watchful gaze of the ancient oak trees in Twin Elms, {name} was destined for greatness as a {char_class.lower()}. Their affinity for nature and the spirits of the Glanfathan tribes marked them as a chosen champion of the land. Their journey began when they received a vision from the goddess Galawain, urging them to embark on a pilgrimage to the sacred sites of Eir Glanfath. Along the way, {name} communed with the spirits of the wild and confronted the forces of corruption that threatened to desecrate the ancient groves. Now, they stand as a guardian of the natural world, wielding their powers to protect the balance between civilization and the wilds.",
+        f"Growing up in the cosmopolitan city of Defiance Bay, {name} was drawn to the bustling markets and scholarly libraries that thrived amidst political intrigue. Trained as a {char_class.lower()}, they excelled in both the arts of diplomacy and the arcane. Their journey began when they uncovered a conspiracy that implicated powerful factions within the city. With {skills[0]} and {skills[1]} at their disposal, {name} embarked on a quest for justice, delving into forbidden archives and confronting corrupt officials. Along the way, they forged alliances with unlikely allies and earned a reputation as a champion of the downtrodden.",
+        f"{name} was born in the cosmopolitan city of Dyrford, where trade routes converge and secrets abound. Trained as a {char_class.lower()}, they honed their skills in diplomacy and espionage, navigating the labyrinthine streets with ease. Their journey began when they stumbled upon a clandestine plot that threatened to destabilize the region. Armed with {skills[0]}, {skills[1]}, and {skills[2]}, {name} embarked on a quest for truth, unraveling a web of deceit that spanned across rival factions and shadowy guilds. Along the way, they encountered assassins and political schemers who tested their resolve and reshaped their understanding of power and betrayal.",
+        f"{name} grew up among the ancient ruins of Old Vailia, where the remnants of a bygone empire whispered of lost treasures and forgotten history. Trained as a {char_class.lower()}, they delved into the mysteries of their ancestors, uncovering artifacts and deciphering ancient languages. Their journey began when they received a vision from the goddess Wael, urging them to seek out the truth behind a series of cryptic prophecies. Along the way, {name} encountered rival explorers and enigmatic scholars who tested their intellect and resolve. Now, they stand at the crossroads of destiny, poised to unravel the secrets of their own lineage and shape the future of the realm.",
+        f"{name} was born in the remote village of Gilded Vale, where superstition and tradition governed daily life. Trained as a {char_class.lower()}, they learned to navigate the dangers of the wilderness and fend off marauding beasts. Their journey began when they received a vision from the god Eothas, guiding them on a pilgrimage to the sacred shrines scattered across the Dyrwood. Along the way, {name} encountered spirits of the past and guardians of the land who tested their faith and resolve. Now, they stand as a beacon of hope in a world beset by darkness, wielding their {skills[0]} and {skills[1]} to confront the encroaching shadows."
+    ]
+    return random.choice(backstories) + f" They are a {alignment.lower()} {race.lower()}."
+
+def generate_character():
+    race = random.choice(list(races_classes.keys()))
+    char_class = random.choice(races_classes[race])
+    alignment = random.choice(alignments)
+    name = generate_name()
+    
+    character = {
+        "Name": name,
+        "Race": race,
+        "Class": char_class,
+        "Alignment": alignment,
+        "Might": roll_ability_scores(),
+        "Constitution": roll_ability_scores(),
+        "Dexterity": roll_ability_scores(),
+        "Perception": roll_ability_scores(),
+        "Intellect": roll_ability_scores(),
+        "Resolve": roll_ability_scores(),
+        "Skills": random.sample(skills, 3),
+        "Backstory": generate_backstory({
+            "Name": name,
+            "Race": race,
+            "Class": char_class,
+            "Alignment": alignment
+        })
+    }
+    return character
+
+# Generate and print a character
+character = generate_character()
+for attribute, value in character.items():
+    print(f"{attribute}: {value}")
